@@ -11,6 +11,7 @@
 #include "DisplayChunk.h"
 #include "ChunkObject.h"
 #include "InputCommands.h"
+#include "Camera.h"
 #include <vector>
 
 
@@ -108,6 +109,8 @@ private:
     std::unique_ptr<DirectX::SpriteBatch>                                   m_sprites;
     std::unique_ptr<DirectX::SpriteFont>                                    m_font;
 
+	std::unique_ptr<Camera>													m_camera;
+	
 #ifdef DXTK_AUDIO
     std::unique_ptr<DirectX::AudioEngine>                                   m_audEngine;
     std::unique_ptr<DirectX::WaveBank>                                      m_waveBank;
