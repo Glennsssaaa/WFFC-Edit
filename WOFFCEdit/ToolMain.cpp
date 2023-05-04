@@ -35,6 +35,7 @@ ToolMain::ToolMain()
 	m_toolInputCommands.vKey = false;
 	m_toolInputCommands.cKey = false;
 	m_toolInputCommands.controlKey = false;
+	m_toolInputCommands.delKey = false;
 	
 }
 
@@ -205,7 +206,7 @@ void ToolMain::CreateObject(SceneObject object) {
 	newSceneObject = object;
 
 	newSceneObject.ID = m_sceneGraph.size()+1;
-	newSceneObject.chunk_ID = 1;
+	newSceneObject.chunk_ID = m_sceneGraph.size()+1;
 	newSceneObject.name = "New Object";
 
 	//send completed object to scenegraph
@@ -337,18 +338,17 @@ void ToolMain::Tick(MSG *msg)
 		}
 		if (m_copiedObject != -1 && m_toolInputCommands.vKey) {
 			CreateObject(m_sceneGraph.at(m_copiedObject));
+
 		}
 	}
 	
 
-	
-
-	/*
-	if (m_toolInputCommands.controlKey && m_toolInputCommands.vKey && m_copiedObject != -1) {
-
-		CreateObject();
-		m_toolInputCommands.vKey = false;
-	}*/
+	if (m_toolInputCommands.delKey) {
+		if (m_selectedObject != -1) {
+			m_d3dRenderer.DeleteObject(m_selectedObject);
+			m_selectedObject = -1;
+		}
+	}
 	
 
 	if (m_toolInputCommands.itemInteract !=0 && m_selectedObject != -1) {
@@ -457,6 +457,11 @@ void ToolMain::UpdateInput(MSG* msg)
 		m_toolInputCommands.controlKey = true;
 	}
 	else m_toolInputCommands.controlKey = false;
+
+	if (GetKeyState(VK_DELETE) < 0) {
+		m_toolInputCommands.delKey = true;
+	}
+	else m_toolInputCommands.delKey = false;
 
 
 	if (m_keyArray['1'])

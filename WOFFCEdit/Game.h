@@ -56,6 +56,7 @@ public:
 	void MoveObject(int objectID, int dir);
 	void RotateObject(int objectID, int dir);
 	void ScaleObject(int objectID, int dir);
+	void DeleteObject(int objectID);
 
 #ifdef DXTK_AUDIO
 	void NewAudioDevice();

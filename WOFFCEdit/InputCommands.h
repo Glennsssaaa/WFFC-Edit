@@ -20,6 +20,7 @@ struct InputCommands
 	bool itemScale;
 
 	bool controlKey;
+	bool delKey;
 	bool vKey;
 	bool cKey;
 };

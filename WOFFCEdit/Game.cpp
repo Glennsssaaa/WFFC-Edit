@@ -646,3 +646,8 @@ void Game::ScaleObject(int objectID, int dir) {
         m_displayList[objectID].m_scale.y += 0.1f;
     }
 }
+
+void Game::DeleteObject(int objectID)
+{
+	m_displayList.erase(m_displayList.begin() + objectID);
+}
