@@ -23,6 +23,13 @@ ToolMain::ToolMain()
 	m_toolInputCommands.mouse_Y = 0;
 	m_toolInputCommands.mouse_LB_Down = false;
 	m_toolInputCommands.mouse_RB_Down = false;
+
+	m_toolInputCommands.itemInteract = 0;
+
+	m_toolInputCommands.itemMove = false;
+	m_toolInputCommands.itemRotate = false;
+	m_toolInputCommands.itemScale = false;
+	m_toolInputCommands.itemSelect = true;
 }
 
 
@@ -290,14 +297,23 @@ void ToolMain::Tick(MSG *msg)
 		//update Scenegraph
 		//add to scenegraph
 		//resend scenegraph to Direct X renderer
-	if (m_toolInputCommands.mouse_LB_Down) {
+	if (m_toolInputCommands.mouse_LB_Down&& m_toolInputCommands.itemSelect){
 		m_selectedObject = m_d3dRenderer.MousePicking();
 		m_toolInputCommands.mouse_LB_Down = false;
 		
 	}
 
-	if (m_toolInputCommands.mouse_RB_Down) {
 
+	if (m_toolInputCommands.itemInteract !=0 && m_selectedObject != -1) {
+		if (m_toolInputCommands.itemMove) {
+			m_d3dRenderer.MoveObject(m_selectedObject, m_toolInputCommands.itemInteract);
+		}
+		else if (m_toolInputCommands.itemRotate) {
+			m_d3dRenderer.RotateObject(m_selectedObject, m_toolInputCommands.itemInteract);
+		}
+		else if (m_toolInputCommands.itemScale) {
+			m_d3dRenderer.ScaleObject(m_selectedObject, m_toolInputCommands.itemInteract);
+		}
 	}
 
 	
@@ -305,7 +321,7 @@ void ToolMain::Tick(MSG *msg)
 	m_d3dRenderer.Tick(&m_toolInputCommands);
 }
 
-void ToolMain::UpdateInput(MSG * msg)
+void ToolMain::UpdateInput(MSG* msg)
 {
 
 	switch (msg->message)
@@ -328,7 +344,7 @@ void ToolMain::UpdateInput(MSG * msg)
 		//set some flag for the mouse button in inputcommands
 		m_toolInputCommands.mouse_LB_Down = true;
 		break;
-	
+
 	case WM_RBUTTONDOWN:
 		m_toolInputCommands.mouse_RB_Down = true;
 		break;
@@ -343,7 +359,7 @@ void ToolMain::UpdateInput(MSG * msg)
 		m_toolInputCommands.forward = true;
 	}
 	else m_toolInputCommands.forward = false;
-	
+
 	if (m_keyArray['S'])
 	{
 		m_toolInputCommands.back = true;
@@ -381,5 +397,54 @@ void ToolMain::UpdateInput(MSG * msg)
 	}
 	else m_toolInputCommands.rotDown = false;
 
+
+	if (m_keyArray['U']) {
+		m_toolInputCommands.itemInteract = 1;
+	}
+	else if (m_keyArray['J'])
+	{
+		m_toolInputCommands.itemInteract = 2;
+	}
+	else if (m_keyArray['H'])
+	{
+		m_toolInputCommands.itemInteract = 3;
+	}
+	else if (m_keyArray['K'])
+	{
+		m_toolInputCommands.itemInteract = 4;
+	}
+	else m_toolInputCommands.itemInteract = 0;
+
+
+	
+	
+	if (m_keyArray['1'])
+	{
+		m_toolInputCommands.itemScale = false;
+		m_toolInputCommands.itemMove = false;
+		m_toolInputCommands.itemRotate = false;
+		m_toolInputCommands.itemSelect = true;
+	}
+	if (m_keyArray['2'])
+	{
+		m_toolInputCommands.itemScale = false;
+		m_toolInputCommands.itemMove = true;
+		m_toolInputCommands.itemRotate = false;
+		m_toolInputCommands.itemSelect = false;
+	}
+	if (m_keyArray['3'])
+	{
+		m_toolInputCommands.itemScale = false;
+		m_toolInputCommands.itemMove = false;
+		m_toolInputCommands.itemRotate = true;
+		m_toolInputCommands.itemSelect = false;
+	}
+	if (m_keyArray['4'])
+	{
+		m_toolInputCommands.itemScale = true;
+		m_toolInputCommands.itemMove = false;
+		m_toolInputCommands.itemRotate = false;
+		m_toolInputCommands.itemSelect = false;
+	}
 	//WASD
 }

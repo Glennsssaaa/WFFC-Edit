@@ -1,21 +1,51 @@
 ﻿  Game.cpp
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(28,20): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(76,59): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(215,45): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(225,57): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(224,57): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(223,97): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(209,10): warning C4101: 'Buffer': unreferenced local variable
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(361,37): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(584,82): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(584,57): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(585,81): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(585,56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(597,46): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(596,46): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(595,98): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(603,111): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(603,85): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(604,109): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(604,83): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(54,62): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(187,45): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(197,57): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(196,57): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(195,97): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(181,10): warning C4101: 'Buffer': unreferenced local variable
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(333,37): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(556,82): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(556,57): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(557,81): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(557,56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(569,46): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(568,46): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(567,98): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(575,111): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(575,85): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(576,109): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(576,83): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
+  ToolMain.cpp
+  _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(102,46): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(103,46): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(104,46): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(105,46): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(106,46): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(107,46): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(108,46): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(109,46): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(110,46): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(122,48): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(123,48): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(124,48): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(128,48): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(129,47): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(130,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(134,50): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(135,50): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(145,57): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(146,57): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(147,57): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(148,58): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(149,58): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(150,58): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(151,59): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(152,56): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(153,54): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(154,57): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(214,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
   Win32SimpleSample.vcxproj -> C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\x64\Debug\WoFEdit.exe

@@ -18,6 +18,7 @@ public:
 	Matrix GetView() const { return m_viewMatrix; }
 	Matrix GetProjection() const { return m_projectionMatrix; }
 
+
 	void SetProjection(const Matrix& proj){m_projectionMatrix = proj;};
 	
 private:

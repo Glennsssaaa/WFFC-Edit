@@ -24,34 +24,6 @@ Game::Game()
 	//modes
 	m_grid = false;
 
-	//functional
-	m_movespeed = 0.30;
-	m_camRotRate = 3.0;
-
-	//camera
-	m_camPosition.x = 0.0f;
-	m_camPosition.y = 3.7f;
-	m_camPosition.z = -3.5f;
-
-	m_camOrientation.x = 0;
-	m_camOrientation.y = 0;
-	m_camOrientation.z = 0;
-
-	m_camLookAt.x = 0.0f;
-	m_camLookAt.y = 0.0f;
-	m_camLookAt.z = 0.0f;
-
-	m_camLookDirection.x = 0.0f;
-	m_camLookDirection.y = 0.0f;
-	m_camLookDirection.z = 0.0f;
-
-	m_camRight.x = 0.0f;
-	m_camRight.y = 0.0f;
-	m_camRight.z = 0.0f;
-
-	m_camOrientation.x = 0.0f;
-	m_camOrientation.y = 0.0f;
-	m_camOrientation.z = 0.0f;
 
 }
 
@@ -73,12 +45,13 @@ void Game::Initialize(HWND window, int width, int height)
 
     m_keyboard = std::make_unique<Keyboard>();
 
-	m_camera = std::make_unique<Camera>(Vector3(0, 3.7, -3.75), Vector3(0, 0, 0), width, height);
 
     m_mouse = std::make_unique<Mouse>();
     m_mouse->SetWindow(window);
 
     m_deviceResources->SetWindow(window, width, height);
+    
+    m_camera = std::make_unique<Camera>(Vector3(0, 3.7, -3.75), Vector3(0, 0, 0), width, height);
 
     m_deviceResources->CreateDeviceResources();
     CreateDeviceDependentResources();
@@ -147,8 +120,7 @@ void Game::Update(DX::StepTimer const& timer)
 	
 	m_camera->Update(m_InputCommands, time);
 
-
-	m_batchEffect->SetView(m_camera->GetView());
+    m_batchEffect->SetView(m_camera->GetView());
     m_batchEffect->SetWorld(Matrix::Identity);
 	m_displayChunk.m_terrainEffect->SetView(m_camera->GetView());
 	m_displayChunk.m_terrainEffect->SetWorld(Matrix::Identity);
@@ -207,7 +179,7 @@ void Game::Render()
 	//CAMERA POSITION ON HUD
 	m_sprites->Begin();
 	WCHAR   Buffer[256];
-	std::wstring var = L"Cam X: " + std::to_wstring(m_camPosition.x) + L"Cam Z: " + std::to_wstring(m_camPosition.z);
+	std::wstring var = L"Cam X: " + std::to_wstring(m_camera->GetPosition().x) + L"Cam Z: " + std::to_wstring(m_camera->GetPosition().z);
 	m_font->DrawString(m_sprites.get(), var.c_str() , XMFLOAT2(100, 10), Colors::Yellow);
 	m_sprites->End();
 
@@ -226,7 +198,7 @@ void Game::Render()
 
 		XMMATRIX local = m_world * XMMatrixTransformation(g_XMZero, Quaternion::Identity, scale, g_XMZero, rotate, translate);
 
-		m_displayList[i].m_model->Draw(context, *m_states, local, m_view, m_projection, false);	//last variable in draw,  make TRUE for wireframe
+		m_displayList[i].m_model->Draw(context, *m_states, local, m_camera->GetView(), m_projection, false);	//last variable in draw,  make TRUE for wireframe
 
 		m_deviceResources->PIXEndEvent();
 	}
@@ -600,8 +572,8 @@ int Game::MousePicking() {
 		XMMATRIX local = m_world * XMMatrixTransformation(g_XMZero, Quaternion::Identity, scale, g_XMZero, rotate, translate);
 
 		//Unproject the points on the near and far plane, with respect to the matrix we just created.
-		XMVECTOR nearPoint = XMVector3Unproject(nearSource, 0.0f, 0.0f, m_ScreenDimensions.right, m_ScreenDimensions.bottom, m_deviceResources->GetScreenViewport().MinDepth, m_deviceResources->GetScreenViewport().MaxDepth, m_projection, m_view, local);
-		XMVECTOR farPoint = XMVector3Unproject(farSource, 0.0f, 0.0f, m_ScreenDimensions.right, m_ScreenDimensions.bottom, m_deviceResources->GetScreenViewport().MinDepth, m_deviceResources->GetScreenViewport().MaxDepth, m_projection, m_view, local);
+		XMVECTOR nearPoint = XMVector3Unproject(nearSource, 0.0f, 0.0f, m_ScreenDimensions.right, m_ScreenDimensions.bottom, m_deviceResources->GetScreenViewport().MinDepth, m_deviceResources->GetScreenViewport().MaxDepth, m_projection, m_camera->GetView(), local);
+		XMVECTOR farPoint = XMVector3Unproject(farSource, 0.0f, 0.0f, m_ScreenDimensions.right, m_ScreenDimensions.bottom, m_deviceResources->GetScreenViewport().MinDepth, m_deviceResources->GetScreenViewport().MaxDepth, m_projection, m_camera->GetView(), local);
 
 		//turn the transformed points into our picking vector. 
 		XMVECTOR pickingVector = farPoint - nearPoint;
@@ -617,7 +589,54 @@ int Game::MousePicking() {
 			}
 		}
 	}
-
 	//if we got a hit.  return it.  
 	return selectedID;
+}
+
+void Game::MoveObject(int objectID, int dir) {
+    if (dir == 1) {
+        m_displayList[objectID].m_position.x += 0.1f;
+    }
+    else if (dir == 2) {
+        m_displayList[objectID].m_position.x -= 0.1f;
+    }
+    else if (dir == 3) {
+        m_displayList[objectID].m_position.y -= 0.1f;
+    }
+    else if (dir == 4) {
+        m_displayList[objectID].m_position.y += 0.1f;
+    }
+}
+
+
+void Game::RotateObject(int objectID, int dir) {
+    if (dir == 1) {
+        m_displayList[objectID].m_orientation.x += 0.1f;
+    }
+    else if (dir == 2) {
+        m_displayList[objectID].m_orientation.x -= 0.1f;
+    }
+    else if (dir == 3) {
+        m_displayList[objectID].m_orientation.y -= 0.1f;
+    }
+    else if (dir == 4) {
+        m_displayList[objectID].m_orientation.y += 0.1f;
+    }
+}
+
+
+
+void Game::ScaleObject(int objectID, int dir) {
+    if (dir == 1) {
+        m_displayList[objectID].m_scale.x += 0.1f;
+    }
+    else if(dir==2) {
+        m_displayList[objectID].m_scale.x -= 0.1f;
+	}
+    else if (dir == 3) {
+        m_displayList[objectID].m_scale.y -= 0.1f;
+    }
+    else if (dir == 4) {
+        m_displayList[objectID].m_scale.y += 0.1f;
+    }
 }

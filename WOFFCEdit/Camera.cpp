@@ -28,6 +28,8 @@ void Camera::Update(const InputCommands& input, const float deltaTime){
 		m_mousePosPrev = Vector2(input.mouse_X, input.mouse_Y);
 		return;
 	}
+
+
 	
 	Vector2 mouseDelta = Vector2(input.mouse_X, input.mouse_Y) - m_mousePosPrev;
 	m_mousePosPrev = Vector2(input.mouse_X, input.mouse_Y);
@@ -35,6 +37,15 @@ void Camera::Update(const InputCommands& input, const float deltaTime){
 	m_orientation.y += mouseDelta.x * m_turnSpeed * deltaTime;
 	m_orientation.x -= mouseDelta.y * m_turnSpeed * deltaTime;
 
+	//clamp x orientation
+	if (m_orientation.x > 1.5f)
+	{
+		m_orientation.x = 1.5f;
+	}
+	if (m_orientation.x < -1.5f)
+	{
+		m_orientation.x = -1.5f;
+	}
 
 	//create right vector from look Direction
 	m_lookDirection.Cross(Vector3::UnitY, m_right);

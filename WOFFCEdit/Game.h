@@ -53,7 +53,9 @@ public:
 	void ClearDisplayList();
 
 	int MousePicking();
-
+	void MoveObject(int objectID, int dir);
+	void RotateObject(int objectID, int dir);
+	void ScaleObject(int objectID, int dir);
 
 #ifdef DXTK_AUDIO
 	void NewAudioDevice();
@@ -75,16 +77,6 @@ private:
 	InputCommands						m_InputCommands;
 	RECT								m_ScreenDimensions;
 	
-	//functionality
-	float								m_movespeed;
-
-	//camera
-	DirectX::SimpleMath::Vector3		m_camPosition;
-	DirectX::SimpleMath::Vector3		m_camOrientation;
-	DirectX::SimpleMath::Vector3		m_camLookAt;
-	DirectX::SimpleMath::Vector3		m_camLookDirection;
-	DirectX::SimpleMath::Vector3		m_camRight;
-	float m_camRotRate;
 
 	//control variables
 	bool m_grid;							//grid rendering on / off
@@ -131,7 +123,6 @@ private:
 #endif
 
     DirectX::SimpleMath::Matrix                                             m_world;
-    DirectX::SimpleMath::Matrix                                             m_view;
     DirectX::SimpleMath::Matrix                                             m_projection;
 
 
