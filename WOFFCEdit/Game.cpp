@@ -559,6 +559,8 @@ int Game::MousePicking() {
 	//Loop through entire display list of objects and pick with each in turn. 
 	for (int i = 0; i < m_displayList.size(); i++)
 	{
+		m_displayList[i].HighlightObject(true);
+
 		//Get the scale factor and translation of the object
 		const XMVECTORF32 scale = { m_displayList[i].m_scale.x,		m_displayList[i].m_scale.y,		m_displayList[i].m_scale.z };
 		const XMVECTORF32 translate = { m_displayList[i].m_position.x,	m_displayList[i].m_position.y,	m_displayList[i].m_position.z };
@@ -589,9 +591,13 @@ int Game::MousePicking() {
 			}
 		}
 	}
+    if (selectedID >= 0) {
+        m_displayList[selectedID].HighlightObject(false);
+    }
 	//if we got a hit.  return it.  
 	return selectedID;
 }
+
 
 void Game::MoveObject(int objectID, int dir) {
     if (dir == 1) {

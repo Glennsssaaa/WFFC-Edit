@@ -9,7 +9,8 @@ ToolMain::ToolMain()
 {
 
 	m_currentChunk = 0;		//default value
-	m_selectedObject = 0;	//initial selection ID
+	m_selectedObject = -1;	//initial selection ID
+	m_copiedObject = -1;
 	m_sceneGraph.clear();	//clear the vector for the scenegraph
 	m_databaseConnection = NULL;
 
@@ -30,6 +31,11 @@ ToolMain::ToolMain()
 	m_toolInputCommands.itemRotate = false;
 	m_toolInputCommands.itemScale = false;
 	m_toolInputCommands.itemSelect = true;
+
+	m_toolInputCommands.vKey = false;
+	m_toolInputCommands.cKey = false;
+	m_toolInputCommands.controlKey = false;
+	
 }
 
 
@@ -77,7 +83,6 @@ void ToolMain::onActionLoad()
 	{
 		m_sceneGraph.clear();		//if not, empty it
 	}
-
 	//SQL
 	int rc;
 	char *sqlCommand;
@@ -194,6 +199,27 @@ void ToolMain::onActionLoad()
 
 }
 
+void ToolMain::CreateObject(SceneObject object) {
+
+	SceneObject newSceneObject;
+	newSceneObject = object;
+
+	newSceneObject.ID = m_sceneGraph.size()+1;
+	newSceneObject.chunk_ID = 1;
+	newSceneObject.name = "New Object";
+
+	//send completed object to scenegraph
+	m_sceneGraph.push_back(newSceneObject);
+	m_copiedObject = -1;
+	m_selectedObject = m_sceneGraph.size() - 1;
+
+	//Process REsults into renderable
+	m_d3dRenderer.BuildDisplayList(&m_sceneGraph);
+	//build the renderable chunk 
+	m_d3dRenderer.BuildDisplayChunk(&m_chunk);
+
+}
+
 void ToolMain::onActionSave()
 {
 	//SQL
@@ -300,9 +326,30 @@ void ToolMain::Tick(MSG *msg)
 	if (m_toolInputCommands.mouse_LB_Down&& m_toolInputCommands.itemSelect){
 		m_selectedObject = m_d3dRenderer.MousePicking();
 		m_toolInputCommands.mouse_LB_Down = false;
-		
+	}
+	else {
+		m_toolInputCommands.mouse_LB_Down = false;
 	}
 
+	if (m_toolInputCommands.controlKey) {
+		if (m_selectedObject != -1 && m_toolInputCommands.cKey) {
+			m_copiedObject = m_selectedObject;
+		}
+		if (m_copiedObject != -1 && m_toolInputCommands.vKey) {
+			CreateObject(m_sceneGraph.at(m_copiedObject));
+		}
+	}
+	
+
+	
+
+	/*
+	if (m_toolInputCommands.controlKey && m_toolInputCommands.vKey && m_copiedObject != -1) {
+
+		CreateObject();
+		m_toolInputCommands.vKey = false;
+	}*/
+	
 
 	if (m_toolInputCommands.itemInteract !=0 && m_selectedObject != -1) {
 		if (m_toolInputCommands.itemMove) {
@@ -352,6 +399,8 @@ void ToolMain::UpdateInput(MSG* msg)
 		m_toolInputCommands.mouse_RB_Down = false;
 		break;
 	}
+	
+	
 	//here we update all the actual app functionality that we want.  This information will either be used int toolmain, or sent down to the renderer (Camera movement etc
 	//WASD movement
 	if (m_keyArray['W'])
@@ -376,28 +425,6 @@ void ToolMain::UpdateInput(MSG* msg)
 		m_toolInputCommands.right = true;
 	}
 	else m_toolInputCommands.right = false;
-	//rotation
-	if (m_keyArray['E'])
-	{
-		m_toolInputCommands.rotRight = true;
-	}
-	else m_toolInputCommands.rotRight = false;
-	if (m_keyArray['Q'])
-	{
-		m_toolInputCommands.rotLeft = true;
-	}
-	else m_toolInputCommands.rotLeft = false;
-	if (m_keyArray['R']) {
-		m_toolInputCommands.rotUp = true;
-	}
-	else m_toolInputCommands.rotUp = false;
-	if (m_keyArray['F'])
-	{
-		m_toolInputCommands.rotDown = true;
-	}
-	else m_toolInputCommands.rotDown = false;
-
-
 	if (m_keyArray['U']) {
 		m_toolInputCommands.itemInteract = 1;
 	}
@@ -414,10 +441,24 @@ void ToolMain::UpdateInput(MSG* msg)
 		m_toolInputCommands.itemInteract = 4;
 	}
 	else m_toolInputCommands.itemInteract = 0;
+	if (m_keyArray['V']) {
+		m_toolInputCommands.vKey = true;
+	}
+	else m_toolInputCommands.vKey = false;
+
+	if (m_keyArray['C']) {
+		m_toolInputCommands.cKey = true;
+	}
+	else m_toolInputCommands.cKey = false;
 
 
-	
-	
+
+	if (GetKeyState(VK_CONTROL)<0) {
+		m_toolInputCommands.controlKey = true;
+	}
+	else m_toolInputCommands.controlKey = false;
+
+
 	if (m_keyArray['1'])
 	{
 		m_toolInputCommands.itemScale = false;

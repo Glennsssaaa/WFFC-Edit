@@ -30,3 +30,13 @@ DisplayObject::~DisplayObject()
 {
 //	delete m_texture_diffuse;
 }
+
+void DisplayObject::HighlightObject(bool state) {
+	m_model->UpdateEffects([&](DirectX::IEffect* effect) {
+		auto lights = dynamic_cast<DirectX::IEffectLights*>(effect);
+	if (lights) {
+		lights->SetLightEnabled(0, state);
+	}
+		});
+	
+}
