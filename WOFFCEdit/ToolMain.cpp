@@ -34,8 +34,11 @@ ToolMain::ToolMain()
 
 	m_toolInputCommands.vKey = false;
 	m_toolInputCommands.cKey = false;
+	m_toolInputCommands.zKey = false;
+	m_toolInputCommands.yKey = false;
 	m_toolInputCommands.controlKey = false;
 	m_toolInputCommands.delKey = false;
+	
 	
 }
 
@@ -342,6 +345,13 @@ void ToolMain::Tick(MSG *msg)
 			m_selectedObject = m_copiedObject;
 			m_copiedObject = -1;
 		}
+
+		if (m_toolInputCommands.yKey) {
+			m_d3dRenderer.Redo();
+		}
+		if (m_toolInputCommands.zKey) {
+			m_d3dRenderer.Undo();
+		}
 	}
 	
 
@@ -452,7 +462,14 @@ void ToolMain::UpdateInput(MSG* msg)
 		m_toolInputCommands.cKey = true;
 	}
 	else m_toolInputCommands.cKey = false;
-
+	if (m_keyArray['Z']) {
+		m_toolInputCommands.zKey = true;
+	}
+	else m_toolInputCommands.zKey = false;
+	if (m_keyArray['Y']) {
+		m_toolInputCommands.yKey = true;
+	}
+	else m_toolInputCommands.yKey = false;
 
 
 	if (GetKeyState(VK_CONTROL)<0) {

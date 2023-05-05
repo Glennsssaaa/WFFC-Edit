@@ -58,6 +58,8 @@ public:
 	void ScaleObject(int objectID, int dir);
 	void DeleteObject(int objectID);
 	void CreateObject(int object, std::vector<SceneObject> * SceneGraph);
+	void Undo();
+	void Redo();
 
 #ifdef DXTK_AUDIO
 	void NewAudioDevice();

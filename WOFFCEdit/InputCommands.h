@@ -23,4 +23,7 @@ struct InputCommands
 	bool delKey;
 	bool vKey;
 	bool cKey;
+	bool zKey;
+	bool yKey;
+	
 };

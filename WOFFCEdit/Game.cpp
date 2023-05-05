@@ -23,8 +23,6 @@ Game::Game()
 	//initial Settings
 	//modes
 	m_grid = false;
-
-
 }
 
 Game::~Game()
@@ -59,6 +57,7 @@ void Game::Initialize(HWND window, int width, int height)
     m_deviceResources->CreateWindowSizeDependentResources();
     CreateWindowSizeDependentResources();
 	GetClientRect(window, &m_ScreenDimensions);
+    
 
 #ifdef DXTK_AUDIO
     // Create DirectXTK for Audio objects
@@ -668,4 +667,12 @@ void Game::CreateObject(int object, std::vector<SceneObject>* SceneGraph){
         m_displayList.push_back(newObject);
         
  
+}
+
+void Game::Undo() {
+
+}
+
+void Game::Redo() {
+    
 }
