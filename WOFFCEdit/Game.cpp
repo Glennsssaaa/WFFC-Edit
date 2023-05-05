@@ -651,3 +651,7 @@ void Game::DeleteObject(int objectID)
 {
 	m_displayList.erase(m_displayList.begin() + objectID);
 }
+
+void Game::CreateObject(int object){
+        m_displayList.push_back(m_displayList[object]);
+}

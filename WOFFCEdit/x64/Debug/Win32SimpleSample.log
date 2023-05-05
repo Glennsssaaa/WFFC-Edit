@@ -27,8 +27,5 @@ C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(
 C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(158,56): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(159,54): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(160,57): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(208,43): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(209,49): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(215,44): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(241,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(220,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   Win32SimpleSample.vcxproj -> C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\x64\Debug\WoFEdit.exe

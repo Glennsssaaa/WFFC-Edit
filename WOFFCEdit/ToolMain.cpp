@@ -86,24 +86,24 @@ void ToolMain::onActionLoad()
 	}
 	//SQL
 	int rc;
-	char *sqlCommand;
-	char *ErrMSG = 0;
-	sqlite3_stmt *pResults;								//results of the query
-	sqlite3_stmt *pResultsChunk;
+	char* sqlCommand;
+	char* ErrMSG = 0;
+	sqlite3_stmt* pResults;								//results of the query
+	sqlite3_stmt* pResultsChunk;
 
 	//OBJECTS IN THE WORLD
 	//prepare SQL Text
 	sqlCommand = "SELECT * from Objects";				//sql command which will return all records from the objects table.
 	//Send Command and fill result object
-	rc = sqlite3_prepare_v2(m_databaseConnection, sqlCommand, -1, &pResults, 0 );
-	
+	rc = sqlite3_prepare_v2(m_databaseConnection, sqlCommand, -1, &pResults, 0);
+
 	//loop for each row in results until there are no more rows.  ie for every row in the results. We create and object
 	while (sqlite3_step(pResults) == SQLITE_ROW)
-	{	
+	{
 		SceneObject newSceneObject;
 		newSceneObject.ID = sqlite3_column_int(pResults, 0);
 		newSceneObject.chunk_ID = sqlite3_column_int(pResults, 1);
-		newSceneObject.model_path		= reinterpret_cast<const char*>(sqlite3_column_text(pResults, 2));
+		newSceneObject.model_path = reinterpret_cast<const char*>(sqlite3_column_text(pResults, 2));
 		newSceneObject.tex_diffuse_path = reinterpret_cast<const char*>(sqlite3_column_text(pResults, 3));
 		newSceneObject.posX = sqlite3_column_double(pResults, 4);
 		newSceneObject.posY = sqlite3_column_double(pResults, 5);
@@ -158,7 +158,7 @@ void ToolMain::onActionLoad()
 		newSceneObject.light_constant = sqlite3_column_double(pResults, 53);
 		newSceneObject.light_linear = sqlite3_column_double(pResults, 54);
 		newSceneObject.light_quadratic = sqlite3_column_double(pResults, 55);
-	
+
 
 		//send completed object to scenegraph
 		m_sceneGraph.push_back(newSceneObject);
@@ -167,7 +167,7 @@ void ToolMain::onActionLoad()
 	//THE WORLD CHUNK
 	//prepare SQL Text
 	sqlCommand = "SELECT * from Chunks";				//sql command which will return all records from  chunks table. There is only one tho.
-														//Send Command and fill result object
+	//Send Command and fill result object
 	rc = sqlite3_prepare_v2(m_databaseConnection, sqlCommand, -1, &pResultsChunk, 0);
 
 
@@ -192,27 +192,6 @@ void ToolMain::onActionLoad()
 	m_chunk.tex_splat_3_tiling = sqlite3_column_int(pResultsChunk, 17);
 	m_chunk.tex_splat_4_tiling = sqlite3_column_int(pResultsChunk, 18);
 
-
-	//Process REsults into renderable
-	m_d3dRenderer.BuildDisplayList(&m_sceneGraph);
-	//build the renderable chunk 
-	m_d3dRenderer.BuildDisplayChunk(&m_chunk);
-
-}
-
-void ToolMain::CreateObject(SceneObject object) {
-
-	SceneObject newSceneObject;
-	newSceneObject = object;
-
-	newSceneObject.ID = m_sceneGraph.size()+1;
-	newSceneObject.chunk_ID = m_sceneGraph.size()+1;
-	newSceneObject.name = "New Object";
-
-	//send completed object to scenegraph
-	m_sceneGraph.push_back(newSceneObject);
-	m_copiedObject = -1;
-	m_selectedObject = m_sceneGraph.size() - 1;
 
 	//Process REsults into renderable
 	m_d3dRenderer.BuildDisplayList(&m_sceneGraph);
@@ -337,8 +316,9 @@ void ToolMain::Tick(MSG *msg)
 			m_copiedObject = m_selectedObject;
 		}
 		if (m_copiedObject != -1 && m_toolInputCommands.vKey) {
-			CreateObject(m_sceneGraph.at(m_copiedObject));
-
+			m_d3dRenderer.CreateObject(m_copiedObject);
+			m_selectedObject = m_copiedObject;
+			m_copiedObject = -1;
 		}
 	}
 	
