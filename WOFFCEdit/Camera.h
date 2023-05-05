@@ -12,7 +12,8 @@ public:
 	Camera(Vector3 pos, Vector3 lookAt, int height, int width);
 
 	void Update(const InputCommands& inputCommands, float deltaTime);
-
+	void LookAtObject(Vector3 objLoc);
+	
 	Vector3 GetPosition() const { return m_position; }
 	Vector3 GetLookAt() const { return m_lookAt; }
 	Matrix GetView() const { return m_viewMatrix; }
@@ -20,12 +21,9 @@ public:
 
 
 	void SetProjection(const Matrix& proj){m_projectionMatrix = proj;};
-	
+
 private:
-	Vector3 m_position;
 	Vector3 m_orientation;
-	Vector3 m_lookAt;
-	Vector3 m_lookDirection;
 	Vector3 m_up;
 	Vector3 m_right;
 
@@ -44,5 +42,11 @@ private:
 
 	Vector2 m_mousePos;
 	Vector2 m_mousePosPrev;
+
+public:
+	Vector3 m_position;
+	Vector3 m_lookDirection;
+	Vector3 m_lookAt;
+
 };
 

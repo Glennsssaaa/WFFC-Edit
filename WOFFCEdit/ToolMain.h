@@ -22,6 +22,9 @@ public: //methods
 	void	onActionLoad();													//load the current chunk
 	afx_msg	void	onActionSave();											//save the current chunk
 	afx_msg void	onActionSaveTerrain();									//save chunk geometry
+	afx_msg void	onActionCopy();
+	afx_msg void	onActionPaste();
+	afx_msg void	onActionDelete();
 
 	void	Tick(MSG *msg);
 	void	UpdateInput(MSG *msg);

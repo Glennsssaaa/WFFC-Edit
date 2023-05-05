@@ -21,19 +21,18 @@ Camera::Camera(Vector3 pos, Vector3 lookAt, int height, int width)
 
 }
 
-void Camera::Update(const InputCommands& input, const float deltaTime){
+void Camera::Update(const InputCommands& input, const float deltaTime) {
 
-	
+
 	if (!input.mouse_RB_Down) {
 		m_mousePosPrev = Vector2(input.mouse_X, input.mouse_Y);
 		return;
 	}
 
 
-	
 	Vector2 mouseDelta = Vector2(input.mouse_X, input.mouse_Y) - m_mousePosPrev;
 	m_mousePosPrev = Vector2(input.mouse_X, input.mouse_Y);
-	
+
 	m_orientation.y += mouseDelta.x * m_turnSpeed * deltaTime;
 	m_orientation.x -= mouseDelta.y * m_turnSpeed * deltaTime;
 
@@ -67,7 +66,7 @@ void Camera::Update(const InputCommands& input, const float deltaTime){
 	{
 		m_position -= m_right;
 	}
-	
+
 
 	//create look direction from Euler angles in m_camOrientation
 	m_lookDirection.x = cos(m_orientation.y) * cos(m_orientation.x);
@@ -82,5 +81,13 @@ void Camera::Update(const InputCommands& input, const float deltaTime){
 
 	//apply camera vectors
 	m_viewMatrix = Matrix::CreateLookAt(m_position, m_lookAt, Vector3::UnitY);
-	
+
+}
+
+void Camera::LookAtObject(Vector3 objLoc) {
+	m_lookAt = objLoc;
+	//m_lookAt = m_position + m_lookDirection;
+	m_position = m_lookAt - m_lookDirection * 10.0f;
+	//apply camera vectors
+	m_viewMatrix = Matrix::CreateLookAt(m_position, m_lookAt, Vector3::UnitY);
 }

@@ -12,7 +12,8 @@ public:
 
 	std::shared_ptr<DirectX::Model>						m_model;							//main Mesh
 	ID3D11ShaderResourceView *							m_texture_diffuse;					//diffuse texture
-
+	std::string											m_modelPath;
+	DirectX::IEffectLights*								m_effect;
 
 	int m_ID;
 	DirectX::SimpleMath::Vector3			m_position;

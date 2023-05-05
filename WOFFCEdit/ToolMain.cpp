@@ -294,6 +294,28 @@ void ToolMain::onActionSaveTerrain()
 	m_d3dRenderer.SaveDisplayChunk(&m_chunk);
 }
 
+void ToolMain::onActionCopy() {
+	if (m_selectedObject != -1) {
+		m_copiedObject = m_selectedObject;
+	}
+}
+
+void ToolMain::onActionPaste() {
+	if (m_copiedObject != -1) {
+		m_d3dRenderer.CreateObject(m_copiedObject, &m_sceneGraph);
+		m_selectedObject = m_copiedObject;
+		m_copiedObject = -1;
+	}
+}
+
+void ToolMain::onActionDelete() {
+	if (m_selectedObject != -1) {
+		m_d3dRenderer.DeleteObject(m_selectedObject);
+		m_selectedObject = -1;
+	}
+}
+
+
 void ToolMain::Tick(MSG *msg)
 {
 	//do we have a selection
@@ -316,7 +338,7 @@ void ToolMain::Tick(MSG *msg)
 			m_copiedObject = m_selectedObject;
 		}
 		if (m_copiedObject != -1 && m_toolInputCommands.vKey) {
-			m_d3dRenderer.CreateObject(m_copiedObject);
+			m_d3dRenderer.CreateObject(m_copiedObject, &m_sceneGraph);
 			m_selectedObject = m_copiedObject;
 			m_copiedObject = -1;
 		}

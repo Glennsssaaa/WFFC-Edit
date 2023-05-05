@@ -340,7 +340,7 @@ void Game::BuildDisplayList(std::vector<SceneObject> * SceneGraph)
 		//load model
 		std::wstring modelwstr = StringToWCHART(SceneGraph->at(i).model_path);							//convect string to Wchar
 		newDisplayObject.m_model = Model::CreateFromCMO(device, modelwstr.c_str(), *m_fxFactory, true);	//get DXSDK to load model "False" for LH coordinate system (maya)
-
+		newDisplayObject.m_modelPath = SceneGraph->at(i).model_path;										//store model path for later use
 		//Load Texture
 		std::wstring texturewstr = StringToWCHART(SceneGraph->at(i).tex_diffuse_path);								//convect string to Wchar
 		HRESULT rs;
@@ -361,8 +361,8 @@ void Game::BuildDisplayList(std::vector<SceneObject> * SceneGraph)
 				lights->SetTexture(newDisplayObject.m_texture_diffuse);			
 			}
 		});
-
-		//set position
+    
+    	//set position
 		newDisplayObject.m_position.x = SceneGraph->at(i).posX;
 		newDisplayObject.m_position.y = SceneGraph->at(i).posY;
 		newDisplayObject.m_position.z = SceneGraph->at(i).posZ;
@@ -581,7 +581,7 @@ int Game::MousePicking() {
 		XMVECTOR pickingVector = farPoint - nearPoint;
 		pickingVector = XMVector3Normalize(pickingVector);
 
-		//loop through mesh list for object
+		//loop through mesh list for objects
 		for (int y = 0; y < m_displayList[i].m_model.get()->meshes.size(); y++)
 		{
 			//checking for ray intersection
@@ -593,7 +593,10 @@ int Game::MousePicking() {
 	}
     if (selectedID >= 0) {
         m_displayList[selectedID].HighlightObject(false);
+		m_camera->LookAtObject(m_displayList[selectedID].m_position);
+ 
     }
+
 	//if we got a hit.  return it.  
 	return selectedID;
 }
@@ -652,6 +655,17 @@ void Game::DeleteObject(int objectID)
 	m_displayList.erase(m_displayList.begin() + objectID);
 }
 
-void Game::CreateObject(int object){
-        m_displayList.push_back(m_displayList[object]);
+void Game::CreateObject(int object, std::vector<SceneObject>* SceneGraph){
+	    DisplayObject newObject = m_displayList[object];
+        Vector3 spawnLoc = m_camera.get()->m_position + m_camera.get()->m_lookDirection * 5.0f;
+        newObject.m_position = spawnLoc;
+
+        auto device = m_deviceResources->GetD3DDevice();
+        auto devicecontext = m_deviceResources->GetD3DDeviceContext();
+        std::wstring modelwstr = StringToWCHART(m_displayList[object].m_modelPath);
+        newObject.m_model = Model::CreateFromCMO(device, modelwstr.c_str(), *m_fxFactory, true);
+        newObject.m_modelPath = m_displayList[object].m_modelPath;
+        m_displayList.push_back(newObject);
+        
+ 
 }
