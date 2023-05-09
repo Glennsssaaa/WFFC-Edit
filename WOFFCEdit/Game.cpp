@@ -595,7 +595,7 @@ int Game::MousePicking() {
 		m_camera->LookAtObject(m_displayList[selectedID].m_position);
  
     }
-
+    
 	//if we got a hit.  return it.  
 	return selectedID;
 }
@@ -614,6 +614,8 @@ void Game::MoveObject(int objectID, int dir) {
     else if (dir == 4) {
         m_displayList[objectID].m_position.y += 0.1f;
     }
+    m_undoStack.push(m_displayList);
+
 }
 
 
@@ -630,6 +632,8 @@ void Game::RotateObject(int objectID, int dir) {
     else if (dir == 4) {
         m_displayList[objectID].m_orientation.y += 0.1f;
     }
+    m_undoStack.push(m_displayList);
+
 }
 
 
@@ -647,14 +651,20 @@ void Game::ScaleObject(int objectID, int dir) {
     else if (dir == 4) {
         m_displayList[objectID].m_scale.y += 0.1f;
     }
+    m_undoStack.push(m_displayList);
+
 }
 
 void Game::DeleteObject(int objectID)
 {
+    m_undoStack.push(m_displayList);
+
 	m_displayList.erase(m_displayList.begin() + objectID);
 }
 
 void Game::CreateObject(int object, std::vector<SceneObject>* SceneGraph){
+    m_undoStack.push(m_displayList);
+
 	    DisplayObject newObject = m_displayList[object];
         Vector3 spawnLoc = m_camera.get()->m_position + m_camera.get()->m_lookDirection * 5.0f;
         newObject.m_position = spawnLoc;
@@ -665,14 +675,22 @@ void Game::CreateObject(int object, std::vector<SceneObject>* SceneGraph){
         newObject.m_model = Model::CreateFromCMO(device, modelwstr.c_str(), *m_fxFactory, true);
         newObject.m_modelPath = m_displayList[object].m_modelPath;
         m_displayList.push_back(newObject);
-        
- 
+        m_undoStack.push(m_displayList);
+
 }
 
 void Game::Undo() {
-
+    if (!m_undoStack.empty()) {
+		m_displayList = m_undoStack.top();
+        m_redoStack.push(m_undoStack.top());
+		m_undoStack.pop();
+	}
 }
 
 void Game::Redo() {
-    
+    if (!m_redoStack.empty()) {
+        m_displayList = m_redoStack.top();
+        m_redoStack.pop();
+        m_undoStack.push(m_displayList);
+    }
 }

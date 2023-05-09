@@ -348,9 +348,11 @@ void ToolMain::Tick(MSG *msg)
 
 		if (m_toolInputCommands.yKey) {
 			m_d3dRenderer.Redo();
+			m_toolInputCommands.yKey = false;
 		}
 		if (m_toolInputCommands.zKey) {
 			m_d3dRenderer.Undo();
+			m_toolInputCommands.zKey = false;
 		}
 	}
 	

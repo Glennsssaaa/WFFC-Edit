@@ -13,7 +13,7 @@
 #include "InputCommands.h"
 #include "Camera.h"
 #include <vector>
-
+#include <stack>
 
 // A basic game implementation that creates a D3D11 device and
 // provides a game loop.
@@ -106,6 +106,8 @@ private:
     std::unique_ptr<DirectX::SpriteFont>                                    m_font;
 
 	std::unique_ptr<Camera>													m_camera;
+	std::stack<std::vector<DisplayObject> >									m_undoStack;
+	std::stack<std::vector<DisplayObject> >									m_redoStack;
 	
 #ifdef DXTK_AUDIO
     std::unique_ptr<DirectX::AudioEngine>                                   m_audEngine;
