@@ -700,3 +700,61 @@ void Game::Redo() {
         m_redoStack.pop();
     }
 }
+
+void Game::ModifyTerrain(int dir) {
+	{
+		Vector3 finalPoint;
+		bool hit = false;
+
+		const XMVECTOR nearSource = XMVectorSet(m_InputCommands.mouse_X, m_InputCommands.mouse_Y, 0.0f, 1.0f);
+		const XMVECTOR farSource = XMVectorSet(m_InputCommands.mouse_X, m_InputCommands.mouse_Y, 1.0f, 1.0f);
+
+		const XMVECTOR nearPoint = XMVector3Unproject(nearSource, 0.0f, 0.0f, m_ScreenDimensions.right, m_ScreenDimensions.bottom, m_deviceResources->GetScreenViewport().MinDepth, m_deviceResources->GetScreenViewport().MaxDepth, m_projection, m_camera->GetView(), m_world);
+		const XMVECTOR farPoint = XMVector3Unproject(farSource, 0.0f, 0.0f, m_ScreenDimensions.right, m_ScreenDimensions.bottom, m_deviceResources->GetScreenViewport().MinDepth, m_deviceResources->GetScreenViewport().MaxDepth, m_projection, m_camera->GetView(), m_world);
+
+        for (int i = 0; i < TERRAINRESOLUTION; i++) {
+            for (int y = 0; y < TERRAINRESOLUTION; y++) {
+                XMVECTOR v1 = XMLoadFloat3(&m_displayChunk.m_terrainGeometry[i][y].position);
+                XMVECTOR v2 = XMLoadFloat3(&m_displayChunk.m_terrainGeometry[i][y+1].position);
+                XMVECTOR v3 = XMLoadFloat3(&m_displayChunk.m_terrainGeometry[i+1][y+1].position);
+                XMVECTOR v4 = XMLoadFloat3(&m_displayChunk.m_terrainGeometry[i+1][y].position);
+
+                XMVECTOR normal = XMVector3Normalize(XMVector3Cross(v2 - v1, v3 - v1));
+                float d = -XMVectorGetX(XMVector3Dot(normal, v1));
+                XMVECTOR vPlane = XMVectorSetW(normal, d);
+
+				XMVECTOR intersection = XMPlaneIntersectLine(vPlane, nearPoint, farPoint);
+
+                if (!XMVector3Equal(intersection, XMVectorZero())) {
+                    Vector3 intersectionPoint;
+					XMStoreFloat3(&intersectionPoint, intersection);
+
+                    if (intersectionPoint.x >= std::min(XMVectorGetX(v1), XMVectorGetX(v2)) && intersectionPoint.x <= std::max(XMVectorGetX(v1), XMVectorGetX(v2)) && intersectionPoint.z >= std::min(XMVectorGetZ(v1), XMVectorGetZ(v4)) && intersectionPoint.z <= std::max(XMVectorGetZ(v1), XMVectorGetZ(v4))) {
+                        finalPoint = intersectionPoint;
+                        hit = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (!hit) {
+			return;
+        }
+        
+        for (int x = 0; x < TERRAINRESOLUTION; x++) {
+            for (int y = 0; y < TERRAINRESOLUTION; y++) {
+                const float dist = Vector3::Distance(Vector3(finalPoint.x, 0, finalPoint.z), Vector3(m_displayChunk.m_terrainGeometry[x][y].position.x, 0, m_displayChunk.m_terrainGeometry[x][y].position.z));
+                const int radius = 20;
+
+                if (dist < radius) {
+                    m_displayChunk.m_terrainGeometry[x][y].position.y += 0.25f * dir;
+                }
+            }
+        }        
+	}
+}
+
+void Game::UpdateNormals() {
+    m_displayChunk.CalculateTerrainNormals();
+}

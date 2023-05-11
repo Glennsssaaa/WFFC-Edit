@@ -18,9 +18,12 @@ struct InputCommands
 	bool itemMove;
 	bool itemSelect;
 	bool itemScale;
+	bool terrainModify;
 
 	bool controlKey;
 	bool delKey;
+	bool shiftKey;
+	
 	bool vKey;
 	bool cKey;
 	bool zKey;

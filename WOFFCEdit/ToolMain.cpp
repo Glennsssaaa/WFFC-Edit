@@ -31,6 +31,7 @@ ToolMain::ToolMain()
 	m_toolInputCommands.itemRotate = false;
 	m_toolInputCommands.itemScale = false;
 	m_toolInputCommands.itemSelect = true;
+	m_toolInputCommands.terrainModify = false;
 
 	m_toolInputCommands.vKey = false;
 	m_toolInputCommands.cKey = false;
@@ -337,12 +338,27 @@ void ToolMain::Tick(MSG *msg)
 		//update Scenegraph
 		//add to scenegraph
 		//resend scenegraph to Direct X renderer
+	
 	if (m_toolInputCommands.mouse_LB_Down&& m_toolInputCommands.itemSelect){
 		m_selectedObject = m_d3dRenderer.MousePicking();
 		m_toolInputCommands.mouse_LB_Down = false;
 	}
-	else {
+	else if (!m_toolInputCommands.mouse_LB_Down && m_toolInputCommands.itemSelect) {
 		m_toolInputCommands.mouse_LB_Down = false;
+	}
+
+	if (m_toolInputCommands.mouse_LB_Down && m_toolInputCommands.terrainModify) {
+		if (m_toolInputCommands.shiftKey) {
+			m_d3dRenderer.ModifyTerrain(-1);
+		}
+		else {
+			m_d3dRenderer.ModifyTerrain(1);
+		}
+		m_terrainModified = true;
+	}
+	else if (!m_toolInputCommands.mouse_LB_Down && m_terrainModified) {
+		m_terrainModified = false;
+		m_d3dRenderer.UpdateNormals();
 	}
 
 	if (m_toolInputCommands.controlKey) {
@@ -415,6 +431,9 @@ void ToolMain::UpdateInput(MSG* msg)
 		//set some flag for the mouse button in inputcommands
 		m_toolInputCommands.mouse_LB_Down = true;
 		break;
+	case WM_LBUTTONUP:
+		m_toolInputCommands.mouse_LB_Down = false;
+		break;
 
 	case WM_RBUTTONDOWN:
 		m_toolInputCommands.mouse_RB_Down = true;
@@ -483,7 +502,6 @@ void ToolMain::UpdateInput(MSG* msg)
 	}
 	else m_toolInputCommands.yKey = false;
 
-
 	if (GetKeyState(VK_CONTROL)<0) {
 		m_toolInputCommands.controlKey = true;
 	}
@@ -494,6 +512,11 @@ void ToolMain::UpdateInput(MSG* msg)
 	}
 	else m_toolInputCommands.delKey = false;
 
+	if (GetKeyState(VK_SHIFT) < 0) {
+		m_toolInputCommands.shiftKey = true;
+	}
+	else m_toolInputCommands.shiftKey = false;
+
 
 	if (m_keyArray['1'])
 	{
@@ -501,6 +524,7 @@ void ToolMain::UpdateInput(MSG* msg)
 		m_toolInputCommands.itemMove = false;
 		m_toolInputCommands.itemRotate = false;
 		m_toolInputCommands.itemSelect = true;
+		m_toolInputCommands.terrainModify = false;
 	}
 	if (m_keyArray['2'])
 	{
@@ -508,6 +532,7 @@ void ToolMain::UpdateInput(MSG* msg)
 		m_toolInputCommands.itemMove = true;
 		m_toolInputCommands.itemRotate = false;
 		m_toolInputCommands.itemSelect = false;
+		m_toolInputCommands.terrainModify = false;
 	}
 	if (m_keyArray['3'])
 	{
@@ -515,6 +540,7 @@ void ToolMain::UpdateInput(MSG* msg)
 		m_toolInputCommands.itemMove = false;
 		m_toolInputCommands.itemRotate = true;
 		m_toolInputCommands.itemSelect = false;
+		m_toolInputCommands.terrainModify = false;
 	}
 	if (m_keyArray['4'])
 	{
@@ -522,6 +548,14 @@ void ToolMain::UpdateInput(MSG* msg)
 		m_toolInputCommands.itemMove = false;
 		m_toolInputCommands.itemRotate = false;
 		m_toolInputCommands.itemSelect = false;
+		m_toolInputCommands.terrainModify = false;
+	}
+	if (m_keyArray['5']) {
+		m_toolInputCommands.itemScale = false;
+		m_toolInputCommands.itemMove = false;
+		m_toolInputCommands.itemRotate = false;
+		m_toolInputCommands.itemSelect = false;
+		m_toolInputCommands.terrainModify = true;
 	}
 	//WASD
 }

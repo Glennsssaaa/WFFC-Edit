@@ -45,7 +45,7 @@ public:
 	void OnSuspending();
 	void OnResuming();
 	void OnWindowSizeChanged(int width, int height);
-
+	
 	//tool specific
 	void BuildDisplayList(std::vector<SceneObject> * SceneGraph); //note vector passed by reference 
 	void BuildDisplayChunk(ChunkObject *SceneChunk);
@@ -58,6 +58,8 @@ public:
 	void ScaleObject(int objectID, int dir);
 	void DeleteObject(int objectID);
 	void CreateObject(int object, std::vector<SceneObject> * SceneGraph);
+	void ModifyTerrain(int dir);
+	void UpdateNormals();
 	void Undo();
 	void Redo();
 
