@@ -54,4 +54,7 @@ private:	//variables
 	int m_height;
 	int m_currentChunk;			//the current chunk of thedatabase that we are operating on.  Dictates loading and saving. 
 	bool m_terrainModified;
+	bool m_undoB;
+	bool m_redoB;
+	bool m_objectB;
 };

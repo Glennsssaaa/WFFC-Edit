@@ -53,16 +53,16 @@ public:
 	void ClearDisplayList();
 
 	int MousePicking();
-	void MoveObject(int objectID, int dir);
-	void RotateObject(int objectID, int dir);
-	void ScaleObject(int objectID, int dir);
+	void MoveObject(int objectID, int dir, bool UStack);
+	void RotateObject(int objectID, int dir, bool UStack);
+	void ScaleObject(int objectID, int dir, bool UStack);
 	void DeleteObject(int objectID);
 	void CreateObject(int object);
 	void ModifyTerrain(int dir);
 	void UpdateNormals();
 	void Undo();
 	void Redo();
-
+	
 #ifdef DXTK_AUDIO
 	void NewAudioDevice();
 #endif
@@ -110,6 +110,8 @@ private:
 	std::unique_ptr<Camera>													m_camera;
 	std::stack<std::vector<DisplayObject> >									m_undoStack;
 	std::stack<std::vector<DisplayObject> >									m_redoStack;
+	bool																	m_panCamera;
+	Vector3																	m_cameraTarget;
 	
 #ifdef DXTK_AUDIO
     std::unique_ptr<DirectX::AudioEngine>                                   m_audEngine;

@@ -39,6 +39,8 @@ ToolMain::ToolMain()
 	m_toolInputCommands.yKey = false;
 	m_toolInputCommands.controlKey = false;
 	m_toolInputCommands.delKey = false;
+
+	m_objectB = true;
 	
 	
 }
@@ -383,13 +385,21 @@ void ToolMain::Tick(MSG *msg)
 		}
 
 		//Checks if the undo or redo key is pressed and calls the suitable function
-		if (m_toolInputCommands.yKey) {
+		if (m_toolInputCommands.yKey && m_redoB) {
 			m_d3dRenderer.Redo();
 			m_toolInputCommands.yKey = false;
+			m_redoB = false;
 		}
-		if (m_toolInputCommands.zKey) {
+		else if (!m_toolInputCommands.yKey) {
+			m_redoB = true;
+		}
+		if (m_toolInputCommands.zKey && m_undoB){
 			m_d3dRenderer.Undo();
 			m_toolInputCommands.zKey = false;
+			m_undoB = false;
+		}
+		else if (!m_toolInputCommands.zKey) {
+			m_undoB = true;
 		}
 	}
 	
@@ -405,15 +415,23 @@ void ToolMain::Tick(MSG *msg)
 	if (m_toolInputCommands.itemInteract !=0 && m_selectedObject != -1) {
 		//Modifies selected object depending if player is on move, rotate or scale mode
 		if (m_toolInputCommands.itemMove) {
-			m_d3dRenderer.MoveObject(m_selectedObject, m_toolInputCommands.itemInteract);
+			m_d3dRenderer.MoveObject(m_selectedObject, m_toolInputCommands.itemInteract, m_objectB);
+			m_objectB = false;
 		}
 		else if (m_toolInputCommands.itemRotate) {
-			m_d3dRenderer.RotateObject(m_selectedObject, m_toolInputCommands.itemInteract);
+			m_d3dRenderer.RotateObject(m_selectedObject, m_toolInputCommands.itemInteract, m_objectB);
+			m_objectB = false;
 		}
 		else if (m_toolInputCommands.itemScale) {
-			m_d3dRenderer.ScaleObject(m_selectedObject, m_toolInputCommands.itemInteract);
+			m_d3dRenderer.ScaleObject(m_selectedObject, m_toolInputCommands.itemInteract, m_objectB);
+			m_objectB = false;
 		}
 	}
+	if (m_toolInputCommands.itemInteract == 0 && !m_objectB) {
+		m_objectB = true;
+	}
+
+
 	
 	//Renderer Update Call
 	m_d3dRenderer.Tick(&m_toolInputCommands);
@@ -479,6 +497,11 @@ void ToolMain::UpdateInput(MSG* msg)
 		m_toolInputCommands.right = true;
 	}
 	else m_toolInputCommands.right = false;
+
+
+
+
+	
 	if (m_keyArray['U']) {
 		m_toolInputCommands.itemInteract = 1;
 	}
@@ -495,6 +518,11 @@ void ToolMain::UpdateInput(MSG* msg)
 		m_toolInputCommands.itemInteract = 4;
 	}
 	else m_toolInputCommands.itemInteract = 0;
+	
+
+
+
+	
 	if (m_keyArray['V']) {
 		m_toolInputCommands.vKey = true;
 	}

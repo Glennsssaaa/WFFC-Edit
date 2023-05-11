@@ -119,6 +119,10 @@ void Game::Update(DX::StepTimer const& timer)
 	
 	m_camera->Update(m_InputCommands, time);
 
+    if (m_panCamera) {
+        m_camera->LookAtObject(m_cameraTarget);
+    }
+
     m_batchEffect->SetView(m_camera->GetView());
     m_batchEffect->SetWorld(Matrix::Identity);
 	m_displayChunk.m_terrainEffect->SetView(m_camera->GetView());
@@ -549,7 +553,7 @@ std::wstring StringToWCHART(std::string s)
 int Game::MousePicking() {
 	int selectedID = -1;
 	float pickedDistance = 0;
-
+    m_panCamera = false;
 	//setup near and far planes of frustum with mouse X and mouse y passed down from Toolmain. 
 	//they may look the same but note, the difference in Z
 	const XMVECTOR nearSource = XMVectorSet(m_InputCommands.mouse_X, m_InputCommands.mouse_Y, 0.0f, 1.0f);
@@ -592,8 +596,8 @@ int Game::MousePicking() {
 	}
     if (selectedID >= 0) {
         m_displayList[selectedID].HighlightObject(false);
-		m_camera->LookAtObject(m_displayList[selectedID].m_position);
- 
+        m_panCamera = true;
+		m_cameraTarget = m_displayList[selectedID].m_position;
     }
     
 	//if we got a hit.  return it.  
@@ -601,9 +605,12 @@ int Game::MousePicking() {
 }
 
 //Moves selected object based on which key is pressed
-void Game::MoveObject(int objectID, int dir) {
-    m_undoStack.push(m_displayList);
-
+void Game::MoveObject(int objectID, int dir, bool UStack) {
+    
+    if (UStack) {
+        m_undoStack.push(m_displayList);
+    }
+    
     if (dir == 1) {
         m_displayList[objectID].m_position.x += 0.1f;
     }
@@ -620,9 +627,12 @@ void Game::MoveObject(int objectID, int dir) {
 }
 
 //Rotates selected object based on which key is pressed
-void Game::RotateObject(int objectID, int dir) {
-    m_undoStack.push(m_displayList);
-
+void Game::RotateObject(int objectID, int dir, bool UStack) {
+    
+    if (UStack) {
+        m_undoStack.push(m_displayList);
+    }
+    
     if (dir == 1) {
         m_displayList[objectID].m_orientation.x += 0.1f;
     }
@@ -639,9 +649,12 @@ void Game::RotateObject(int objectID, int dir) {
 }
 
 //Scales selected object based on which key is pressed
-void Game::ScaleObject(int objectID, int dir) {
-    m_undoStack.push(m_displayList);
-
+void Game::ScaleObject(int objectID, int dir, bool UStack) {
+    
+    if (UStack) {
+        m_undoStack.push(m_displayList);
+    }
+    
     if (dir == 1) {
         m_displayList[objectID].m_scale.x += 0.1f;
     }

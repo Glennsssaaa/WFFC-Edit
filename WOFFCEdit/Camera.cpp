@@ -87,7 +87,9 @@ void Camera::Update(const InputCommands& input, const float deltaTime) {
 void Camera::LookAtObject(Vector3 objLoc) {
 	m_lookAt = objLoc;
 	//m_lookAt = m_position + m_lookDirection;
-	m_position = m_lookAt - m_lookDirection * 10.0f;
+	Vector3 targetPosition;
+	targetPosition = m_lookAt - m_lookDirection * 10.0f;
+	m_position += (targetPosition - m_position) * 0.1f;
 	//apply camera vectors
 	m_viewMatrix = Matrix::CreateLookAt(m_position, m_lookAt, Vector3::UnitY);
 }
