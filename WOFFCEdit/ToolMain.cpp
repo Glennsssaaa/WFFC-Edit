@@ -318,6 +318,15 @@ void ToolMain::onActionDelete() {
 	}
 }
 
+void ToolMain::onActionUndo() {
+	m_d3dRenderer.Undo();
+}
+
+void ToolMain::onActionRedo()
+{
+	m_d3dRenderer.Redo();
+}
+
 
 void ToolMain::Tick(MSG *msg)
 {
@@ -350,6 +359,7 @@ void ToolMain::Tick(MSG *msg)
 			m_d3dRenderer.Redo();
 			m_toolInputCommands.yKey = false;
 		}
+		
 		if (m_toolInputCommands.zKey) {
 			m_d3dRenderer.Undo();
 			m_toolInputCommands.zKey = false;

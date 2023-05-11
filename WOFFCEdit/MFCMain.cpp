@@ -10,6 +10,8 @@ BEGIN_MESSAGE_MAP(MFCMain, CWinApp)
 	ON_COMMAND(ID_EDIT_COPY, &MFCMain::MenuEditCopy)
 	ON_COMMAND(ID_EDIT_PASTE, &MFCMain::MenuEditPaste)
 	ON_COMMAND(ID_EDIT_DELETE, &MFCMain::MenuEditDelete)
+	ON_COMMAND(ID_EDIT_UNDO, &MFCMain::MenuEditUndo)
+	ON_COMMAND(ID_EDIT_REDO, &MFCMain::MenuEditRedo)
 	ON_UPDATE_COMMAND_UI(ID_INDICATOR_TOOL, &CMyFrame::OnUpdatePage)
 END_MESSAGE_MAP()
 
@@ -123,6 +125,14 @@ void MFCMain::MenuEditPaste() {
 
 void MFCMain::MenuEditDelete() {
 	m_ToolSystem.onActionDelete();
+}
+
+void MFCMain::MenuEditUndo() {
+	m_ToolSystem.onActionUndo();
+}
+
+void MFCMain::MenuEditRedo() {
+	m_ToolSystem.onActionRedo();
 }
 
 MFCMain::MFCMain()

@@ -38,6 +38,8 @@ private:
 	afx_msg void MenuEditCopy();
 	afx_msg void MenuEditPaste();
 	afx_msg void MenuEditDelete();
+	afx_msg void MenuEditUndo();
+	afx_msg void MenuEditRedo();
 
 
 	DECLARE_MESSAGE_MAP()	// required macro for message map functionality  One per class

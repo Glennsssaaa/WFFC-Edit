@@ -19,7 +19,7 @@ Game::Game()
     m_deviceResources = std::make_unique<DX::DeviceResources>();
     m_deviceResources->RegisterDeviceNotify(this);
 	m_displayList.clear();
-	
+
 	//initial Settings
 	//modes
 	m_grid = false;
@@ -602,6 +602,8 @@ int Game::MousePicking() {
 
 
 void Game::MoveObject(int objectID, int dir) {
+    m_undoStack.push(m_displayList);
+
     if (dir == 1) {
         m_displayList[objectID].m_position.x += 0.1f;
     }
@@ -614,12 +616,13 @@ void Game::MoveObject(int objectID, int dir) {
     else if (dir == 4) {
         m_displayList[objectID].m_position.y += 0.1f;
     }
-    m_undoStack.push(m_displayList);
 
 }
 
 
 void Game::RotateObject(int objectID, int dir) {
+    m_undoStack.push(m_displayList);
+
     if (dir == 1) {
         m_displayList[objectID].m_orientation.x += 0.1f;
     }
@@ -632,13 +635,14 @@ void Game::RotateObject(int objectID, int dir) {
     else if (dir == 4) {
         m_displayList[objectID].m_orientation.y += 0.1f;
     }
-    m_undoStack.push(m_displayList);
 
 }
 
 
 
 void Game::ScaleObject(int objectID, int dir) {
+    m_undoStack.push(m_displayList);
+
     if (dir == 1) {
         m_displayList[objectID].m_scale.x += 0.1f;
     }
@@ -651,7 +655,6 @@ void Game::ScaleObject(int objectID, int dir) {
     else if (dir == 4) {
         m_displayList[objectID].m_scale.y += 0.1f;
     }
-    m_undoStack.push(m_displayList);
 
 }
 
@@ -663,7 +666,8 @@ void Game::DeleteObject(int objectID)
 }
 
 void Game::CreateObject(int object, std::vector<SceneObject>* SceneGraph){
-    m_undoStack.push(m_displayList);
+   
+        m_undoStack.push(m_displayList);
 
 	    DisplayObject newObject = m_displayList[object];
         Vector3 spawnLoc = m_camera.get()->m_position + m_camera.get()->m_lookDirection * 5.0f;
@@ -675,22 +679,24 @@ void Game::CreateObject(int object, std::vector<SceneObject>* SceneGraph){
         newObject.m_model = Model::CreateFromCMO(device, modelwstr.c_str(), *m_fxFactory, true);
         newObject.m_modelPath = m_displayList[object].m_modelPath;
         m_displayList.push_back(newObject);
-        m_undoStack.push(m_displayList);
-
 }
 
 void Game::Undo() {
     if (!m_undoStack.empty()) {
-		m_displayList = m_undoStack.top();
-        m_redoStack.push(m_undoStack.top());
+        m_redoStack.push(m_displayList);
+
+        m_displayList = m_undoStack.top();
+        
 		m_undoStack.pop();
-	}
+    }
 }
 
 void Game::Redo() {
     if (!m_redoStack.empty()) {
-        m_displayList = m_redoStack.top();
-        m_redoStack.pop();
         m_undoStack.push(m_displayList);
+        
+        m_displayList = m_redoStack.top();
+        
+        m_redoStack.pop();
     }
 }

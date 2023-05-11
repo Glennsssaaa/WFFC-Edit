@@ -25,6 +25,8 @@ public: //methods
 	afx_msg void	onActionCopy();
 	afx_msg void	onActionPaste();
 	afx_msg void	onActionDelete();
+	afx_msg void	onActionUndo();
+	afx_msg void	onActionRedo();
 
 	void	Tick(MSG *msg);
 	void	UpdateInput(MSG *msg);
@@ -51,7 +53,5 @@ private:	//variables
 	int m_width;		//dimensions passed to directX
 	int m_height;
 	int m_currentChunk;			//the current chunk of thedatabase that we are operating on.  Dictates loading and saving. 
-	
-
 	
 };
