@@ -298,12 +298,14 @@ void ToolMain::onActionSaveTerrain()
 	m_d3dRenderer.SaveDisplayChunk(&m_chunk);
 }
 
+//Calls the copy function in the renderer
 void ToolMain::onActionCopy() {
 	if (m_selectedObject != -1) {
 		m_copiedObject = m_selectedObject;
 	}
 }
 
+//Calls the paste function in the renderer
 void ToolMain::onActionPaste() {
 	if (m_copiedObject != -1) {
 		m_d3dRenderer.CreateObject(m_copiedObject, &m_sceneGraph);
@@ -312,6 +314,7 @@ void ToolMain::onActionPaste() {
 	}
 }
 
+//Calls the delete function in the renderer
 void ToolMain::onActionDelete() {
 	if (m_selectedObject != -1) {
 		m_d3dRenderer.DeleteObject(m_selectedObject);
@@ -319,10 +322,12 @@ void ToolMain::onActionDelete() {
 	}
 }
 
+//Calls the undo function in the renderer
 void ToolMain::onActionUndo() {
 	m_d3dRenderer.Undo();
 }
 
+//Calls the redo function in the renderer
 void ToolMain::onActionRedo()
 {
 	m_d3dRenderer.Redo();
@@ -335,10 +340,12 @@ void ToolMain::Tick(MSG *msg)
 	//do we have a mode
 	//are we clicking / dragging /releasing
 	//has something changed
-		//update Scenegraph
-		//add to scenegraph
-		//resend scenegraph to Direct X renderer
+	//update Scenegraph
+	//add to scenegraph
+	//resend scenegraph to Direct X renderer
 	
+
+	//Checks for mouse input and whether the user is on the item select mode, and calls the mouse picking function
 	if (m_toolInputCommands.mouse_LB_Down&& m_toolInputCommands.itemSelect){
 		m_selectedObject = m_d3dRenderer.MousePicking();
 		m_toolInputCommands.mouse_LB_Down = false;
@@ -347,6 +354,7 @@ void ToolMain::Tick(MSG *msg)
 		m_toolInputCommands.mouse_LB_Down = false;
 	}
 
+	//Checks for mouse input and whether the user is on the terrain modify mode, and calls the terrain modify function
 	if (m_toolInputCommands.mouse_LB_Down && m_toolInputCommands.terrainModify) {
 		if (m_toolInputCommands.shiftKey) {
 			m_d3dRenderer.ModifyTerrain(-1);
@@ -356,12 +364,15 @@ void ToolMain::Tick(MSG *msg)
 		}
 		m_terrainModified = true;
 	}
+	//Updates the terrain normal after the user has finished modifying the terrain
 	else if (!m_toolInputCommands.mouse_LB_Down && m_terrainModified) {
 		m_terrainModified = false;
 		m_d3dRenderer.UpdateNormals();
 	}
 
+	//Checks for control key input
 	if (m_toolInputCommands.controlKey) {
+		//Checks if the user has an object selected and if copy key or paste key is pressed
 		if (m_selectedObject != -1 && m_toolInputCommands.cKey) {
 			m_copiedObject = m_selectedObject;
 		}
@@ -371,18 +382,18 @@ void ToolMain::Tick(MSG *msg)
 			m_copiedObject = -1;
 		}
 
+		//Checks if the undo or redo key is pressed and calls the suitable function
 		if (m_toolInputCommands.yKey) {
 			m_d3dRenderer.Redo();
 			m_toolInputCommands.yKey = false;
 		}
-		
 		if (m_toolInputCommands.zKey) {
 			m_d3dRenderer.Undo();
 			m_toolInputCommands.zKey = false;
 		}
 	}
 	
-
+	//Checks if the delete key is pressed and calls the delete function
 	if (m_toolInputCommands.delKey) {
 		if (m_selectedObject != -1) {
 			m_d3dRenderer.DeleteObject(m_selectedObject);
@@ -390,8 +401,9 @@ void ToolMain::Tick(MSG *msg)
 		}
 	}
 	
-
+	//Checks if the user is on the item select mode and if the user has an object selected
 	if (m_toolInputCommands.itemInteract !=0 && m_selectedObject != -1) {
+		//Modifies selected object depending if player is on move, rotate or scale mode
 		if (m_toolInputCommands.itemMove) {
 			m_d3dRenderer.MoveObject(m_selectedObject, m_toolInputCommands.itemInteract);
 		}
@@ -402,7 +414,6 @@ void ToolMain::Tick(MSG *msg)
 			m_d3dRenderer.ScaleObject(m_selectedObject, m_toolInputCommands.itemInteract);
 		}
 	}
-
 	
 	//Renderer Update Call
 	m_d3dRenderer.Tick(&m_toolInputCommands);

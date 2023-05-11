@@ -57,7 +57,7 @@ public:
 	void RotateObject(int objectID, int dir);
 	void ScaleObject(int objectID, int dir);
 	void DeleteObject(int objectID);
-	void CreateObject(int object, std::vector<SceneObject> * SceneGraph);
+	void CreateObject(int object);
 	void ModifyTerrain(int dir);
 	void UpdateNormals();
 	void Undo();

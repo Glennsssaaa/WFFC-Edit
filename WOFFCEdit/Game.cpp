@@ -600,7 +600,7 @@ int Game::MousePicking() {
 	return selectedID;
 }
 
-
+//Moves selected object based on which key is pressed
 void Game::MoveObject(int objectID, int dir) {
     m_undoStack.push(m_displayList);
 
@@ -619,7 +619,7 @@ void Game::MoveObject(int objectID, int dir) {
 
 }
 
-
+//Rotates selected object based on which key is pressed
 void Game::RotateObject(int objectID, int dir) {
     m_undoStack.push(m_displayList);
 
@@ -638,8 +638,7 @@ void Game::RotateObject(int objectID, int dir) {
 
 }
 
-
-
+//Scales selected object based on which key is pressed
 void Game::ScaleObject(int objectID, int dir) {
     m_undoStack.push(m_displayList);
 
@@ -658,6 +657,7 @@ void Game::ScaleObject(int objectID, int dir) {
 
 }
 
+//Deletes selected object
 void Game::DeleteObject(int objectID)
 {
     m_undoStack.push(m_displayList);
@@ -665,7 +665,8 @@ void Game::DeleteObject(int objectID)
 	m_displayList.erase(m_displayList.begin() + objectID);
 }
 
-void Game::CreateObject(int object, std::vector<SceneObject>* SceneGraph){
+//Creates new object based on the object ID passed in
+void Game::CreateObject(int object){
    
         m_undoStack.push(m_displayList);
 
@@ -681,6 +682,7 @@ void Game::CreateObject(int object, std::vector<SceneObject>* SceneGraph){
         m_displayList.push_back(newObject);
 }
 
+//Undoes the last action
 void Game::Undo() {
     if (!m_undoStack.empty()) {
         m_redoStack.push(m_displayList);
@@ -691,6 +693,7 @@ void Game::Undo() {
     }
 }
 
+//Redoes the last action
 void Game::Redo() {
     if (!m_redoStack.empty()) {
         m_undoStack.push(m_displayList);
@@ -701,17 +704,19 @@ void Game::Redo() {
     }
 }
 
+//Modifies the terrain based on the mouse position
 void Game::ModifyTerrain(int dir) {
 	{
 		Vector3 finalPoint;
 		bool hit = false;
-
+           
+		//Vectors for the ray
 		const XMVECTOR nearSource = XMVectorSet(m_InputCommands.mouse_X, m_InputCommands.mouse_Y, 0.0f, 1.0f);
 		const XMVECTOR farSource = XMVectorSet(m_InputCommands.mouse_X, m_InputCommands.mouse_Y, 1.0f, 1.0f);
-
 		const XMVECTOR nearPoint = XMVector3Unproject(nearSource, 0.0f, 0.0f, m_ScreenDimensions.right, m_ScreenDimensions.bottom, m_deviceResources->GetScreenViewport().MinDepth, m_deviceResources->GetScreenViewport().MaxDepth, m_projection, m_camera->GetView(), m_world);
 		const XMVECTOR farPoint = XMVector3Unproject(farSource, 0.0f, 0.0f, m_ScreenDimensions.right, m_ScreenDimensions.bottom, m_deviceResources->GetScreenViewport().MinDepth, m_deviceResources->GetScreenViewport().MaxDepth, m_projection, m_camera->GetView(), m_world);
 
+		//Loops through the terrain and checks if the ray intersects with the terrain
         for (int i = 0; i < TERRAINRESOLUTION; i++) {
             for (int y = 0; y < TERRAINRESOLUTION; y++) {
                 XMVECTOR v1 = XMLoadFloat3(&m_displayChunk.m_terrainGeometry[i][y].position);
@@ -725,10 +730,12 @@ void Game::ModifyTerrain(int dir) {
 
 				XMVECTOR intersection = XMPlaneIntersectLine(vPlane, nearPoint, farPoint);
 
+                //Checks if the intersection isnt a zero vector
                 if (!XMVector3Equal(intersection, XMVectorZero())) {
                     Vector3 intersectionPoint;
 					XMStoreFloat3(&intersectionPoint, intersection);
 
+                    //Checks if the intersection point is within the bounding box
                     if (intersectionPoint.x >= std::min(XMVectorGetX(v1), XMVectorGetX(v2)) && intersectionPoint.x <= std::max(XMVectorGetX(v1), XMVectorGetX(v2)) && intersectionPoint.z >= std::min(XMVectorGetZ(v1), XMVectorGetZ(v4)) && intersectionPoint.z <= std::max(XMVectorGetZ(v1), XMVectorGetZ(v4))) {
                         finalPoint = intersectionPoint;
                         hit = true;
@@ -737,17 +744,19 @@ void Game::ModifyTerrain(int dir) {
                 }
             }
         }
-
+        //Returns if no intersection is found
         if (!hit) {
 			return;
         }
         
+        //Loops through the terrain and modifies the terrain geometry
         for (int x = 0; x < TERRAINRESOLUTION; x++) {
             for (int y = 0; y < TERRAINRESOLUTION; y++) {
                 const float dist = Vector3::Distance(Vector3(finalPoint.x, 0, finalPoint.z), Vector3(m_displayChunk.m_terrainGeometry[x][y].position.x, 0, m_displayChunk.m_terrainGeometry[x][y].position.z));
                 const int radius = 20;
-
+                
                 if (dist < radius) {
+                    //Increases or decreases the terrains Y value
                     m_displayChunk.m_terrainGeometry[x][y].position.y += 0.25f * dir;
                 }
             }
@@ -755,6 +764,7 @@ void Game::ModifyTerrain(int dir) {
 	}
 }
 
+//Updates the normals of the terrain
 void Game::UpdateNormals() {
     m_displayChunk.CalculateTerrainNormals();
 }
