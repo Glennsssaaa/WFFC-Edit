@@ -308,7 +308,7 @@ void ToolMain::onActionCopy() {
 //Calls the paste function in the renderer
 void ToolMain::onActionPaste() {
 	if (m_copiedObject != -1) {
-		m_d3dRenderer.CreateObject(m_copiedObject, &m_sceneGraph);
+		m_d3dRenderer.CreateObject(m_copiedObject);
 		m_selectedObject = m_copiedObject;
 		m_copiedObject = -1;
 	}
@@ -377,7 +377,7 @@ void ToolMain::Tick(MSG *msg)
 			m_copiedObject = m_selectedObject;
 		}
 		if (m_copiedObject != -1 && m_toolInputCommands.vKey) {
-			m_d3dRenderer.CreateObject(m_copiedObject, &m_sceneGraph);
+			m_d3dRenderer.CreateObject(m_copiedObject);
 			m_selectedObject = m_copiedObject;
 			m_copiedObject = -1;
 		}

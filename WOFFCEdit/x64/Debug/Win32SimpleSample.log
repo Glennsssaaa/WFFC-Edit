@@ -1,74 +1,4 @@
-﻿  DisplayChunk.cpp
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\DisplayChunk.cpp(14,50): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\DisplayChunk.cpp(15,49): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\DisplayChunk.cpp(73,39): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\DisplayChunk.cpp(74,185): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\DisplayChunk.cpp(74,81): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\DisplayChunk.cpp(94,10): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\DisplayChunk.cpp(152,10): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\DisplayChunk.cpp(174,39): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\DisplayChunk.cpp(189,30): warning C4101: 'index4': unreferenced local variable
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\DisplayChunk.cpp(189,14): warning C4101: 'index2': unreferenced local variable
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\DisplayChunk.cpp(189,22): warning C4101: 'index3': unreferenced local variable
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\DisplayChunk.cpp(189,6): warning C4101: 'index1': unreferenced local variable
-  Game.cpp
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(52,62): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(186,45): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(196,57): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(195,57): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(194,97): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(180,10): warning C4101: 'Buffer': unreferenced local variable
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(332,37): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(555,82): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(555,57): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(556,81): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(556,56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(570,46): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(569,46): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(568,98): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(576,111): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(576,85): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(577,109): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(577,83): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(709,83): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(709,58): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(710,82): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(710,57): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(712,117): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(712,91): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(713,115): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\Game.cpp(713,89): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
-  MFCFrame.cpp
-  _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\resource.h(15,1): warning C4005: 'ID_EDIT_COPY': macro redefinition
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\atlmfc\include\afxres.h(251,1): message : see previous definition of 'ID_EDIT_COPY'
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\resource.h(16,1): warning C4005: 'ID_EDIT_PASTE': macro redefinition
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\atlmfc\include\afxres.h(254,1): message : see previous definition of 'ID_EDIT_PASTE'
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\resource.h(20,1): warning C4005: 'ID_EDIT_UNDO': macro redefinition
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\atlmfc\include\afxres.h(260,1): message : see previous definition of 'ID_EDIT_UNDO'
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\resource.h(21,1): warning C4005: 'ID_EDIT_REDO': macro redefinition
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\atlmfc\include\afxres.h(261,1): message : see previous definition of 'ID_EDIT_REDO'
-  MFCMain.cpp
-  _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\resource.h(15,1): warning C4005: 'ID_EDIT_COPY': macro redefinition
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\atlmfc\include\afxres.h(251,1): message : see previous definition of 'ID_EDIT_COPY'
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\resource.h(16,1): warning C4005: 'ID_EDIT_PASTE': macro redefinition
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\atlmfc\include\afxres.h(254,1): message : see previous definition of 'ID_EDIT_PASTE'
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\resource.h(20,1): warning C4005: 'ID_EDIT_UNDO': macro redefinition
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\atlmfc\include\afxres.h(260,1): message : see previous definition of 'ID_EDIT_UNDO'
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\resource.h(21,1): warning C4005: 'ID_EDIT_REDO': macro redefinition
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\atlmfc\include\afxres.h(261,1): message : see previous definition of 'ID_EDIT_REDO'
-  Main.cpp
-  _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\resource.h(15,1): warning C4005: 'ID_EDIT_COPY': macro redefinition
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\atlmfc\include\afxres.h(251,1): message : see previous definition of 'ID_EDIT_COPY'
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\resource.h(16,1): warning C4005: 'ID_EDIT_PASTE': macro redefinition
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\atlmfc\include\afxres.h(254,1): message : see previous definition of 'ID_EDIT_PASTE'
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\resource.h(20,1): warning C4005: 'ID_EDIT_UNDO': macro redefinition
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\atlmfc\include\afxres.h(260,1): message : see previous definition of 'ID_EDIT_UNDO'
-C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\resource.h(21,1): warning C4005: 'ID_EDIT_REDO': macro redefinition
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\atlmfc\include\afxres.h(261,1): message : see previous definition of 'ID_EDIT_REDO'
-  ToolMain.cpp
+﻿  ToolMain.cpp
   _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
 C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\resource.h(15,1): warning C4005: 'ID_EDIT_COPY': macro redefinition
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\atlmfc\include\afxres.h(251,1): message : see previous definition of 'ID_EDIT_COPY'
@@ -106,5 +36,4 @@ C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(
 C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(163,54): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(164,57): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\ToolMain.cpp(224,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  Generating Code...
   Win32SimpleSample.vcxproj -> C:\Users\glenn\Desktop\Uni work (sad face)\405\WFFC-Edit\WOFFCEdit\x64\Debug\WoFEdit.exe
