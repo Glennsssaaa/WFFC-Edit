@@ -517,6 +517,12 @@ void ToolMain::UpdateInput(MSG* msg)
 	{
 		m_toolInputCommands.itemInteract = 4;
 	}
+	else if (m_keyArray['I']) {
+		m_toolInputCommands.itemInteract = 5;
+	}
+	else if (m_keyArray['O']){
+		m_toolInputCommands.itemInteract = 6;
+	}
 	else m_toolInputCommands.itemInteract = 0;
 	
 
@@ -564,6 +570,7 @@ void ToolMain::UpdateInput(MSG* msg)
 		m_toolInputCommands.itemRotate = false;
 		m_toolInputCommands.itemSelect = true;
 		m_toolInputCommands.terrainModify = false;
+		m_d3dRenderer.m_selection = L"Object Selection";
 	}
 	if (m_keyArray['2'])
 	{
@@ -572,6 +579,7 @@ void ToolMain::UpdateInput(MSG* msg)
 		m_toolInputCommands.itemRotate = false;
 		m_toolInputCommands.itemSelect = false;
 		m_toolInputCommands.terrainModify = false;
+		m_d3dRenderer.m_selection = L"Object Movement";
 	}
 	if (m_keyArray['3'])
 	{
@@ -580,6 +588,7 @@ void ToolMain::UpdateInput(MSG* msg)
 		m_toolInputCommands.itemRotate = true;
 		m_toolInputCommands.itemSelect = false;
 		m_toolInputCommands.terrainModify = false;
+		m_d3dRenderer.m_selection = L"Object Rotation";
 	}
 	if (m_keyArray['4'])
 	{
@@ -588,6 +597,7 @@ void ToolMain::UpdateInput(MSG* msg)
 		m_toolInputCommands.itemRotate = false;
 		m_toolInputCommands.itemSelect = false;
 		m_toolInputCommands.terrainModify = false;
+		m_d3dRenderer.m_selection = L"Object Scaling";
 	}
 	if (m_keyArray['5']) {
 		m_toolInputCommands.itemScale = false;
@@ -595,6 +605,7 @@ void ToolMain::UpdateInput(MSG* msg)
 		m_toolInputCommands.itemRotate = false;
 		m_toolInputCommands.itemSelect = false;
 		m_toolInputCommands.terrainModify = true;
+		m_d3dRenderer.m_selection = L"Terrain Modification";
 	}
 	//WASD
 }

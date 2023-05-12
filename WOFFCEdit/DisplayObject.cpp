@@ -6,7 +6,6 @@ DisplayObject::DisplayObject()
 {
 	m_model = NULL;
 	m_texture_diffuse = NULL;
-	m_effect = NULL;
 	m_orientation.x = 0.0f;
 	m_orientation.y = 0.0f;
 	m_orientation.z = 0.0f;
@@ -38,12 +37,11 @@ void DisplayObject::HighlightObject(bool state) {
 
 	
 	m_model->UpdateEffects([&](DirectX::IEffect* effect) {
-		m_effect = dynamic_cast<DirectX::IEffectLights*> (effect);
-		if (m_effect) {
-			m_effect->SetLightEnabled(0, state);
-		}
-		});
-
-
-	
+		auto fog = dynamic_cast<DirectX::IEffectFog*>(effect);
+	if (fog) {
+		fog->SetFogEnabled(!state);
+		fog->SetFogStart(0);
+		fog->SetFogEnd(8);
+		fog->SetFogColor(DirectX::Colors::White);
+	}});
 }

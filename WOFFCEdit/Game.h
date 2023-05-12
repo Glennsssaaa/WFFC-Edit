@@ -62,6 +62,8 @@ public:
 	void UpdateNormals();
 	void Undo();
 	void Redo();
+	std::wstring															m_selection;
+
 	
 #ifdef DXTK_AUDIO
 	void NewAudioDevice();

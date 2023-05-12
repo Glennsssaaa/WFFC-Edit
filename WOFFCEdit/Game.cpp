@@ -23,6 +23,7 @@ Game::Game()
 	//initial Settings
 	//modes
 	m_grid = false;
+    m_selection = L"Object Selection";
 }
 
 Game::~Game()
@@ -171,6 +172,7 @@ void Game::Render()
 
     m_deviceResources->PIXBeginEvent(L"Render");
     auto context = m_deviceResources->GetD3DDeviceContext();
+    //CAMERA POSITION ON HUD
 
 	if (m_grid)
 	{
@@ -179,12 +181,9 @@ void Game::Render()
 		const XMVECTORF32 yaxis = { 0.f, 0.f, 512.f };
 		DrawGrid(xaxis, yaxis, g_XMZero, 512, 512, Colors::Gray);
 	}
-	//CAMERA POSITION ON HUD
-	m_sprites->Begin();
-	WCHAR   Buffer[256];
-	std::wstring var = L"Cam X: " + std::to_wstring(m_camera->GetPosition().x) + L"Cam Z: " + std::to_wstring(m_camera->GetPosition().z);
-	m_font->DrawString(m_sprites.get(), var.c_str() , XMFLOAT2(100, 10), Colors::Yellow);
-	m_sprites->End();
+    
+
+
 
 	//RENDER OBJECTS FROM SCENEGRAPH
 	int numRenderObjects = m_displayList.size();
@@ -205,6 +204,7 @@ void Game::Render()
 
 		m_deviceResources->PIXEndEvent();
 	}
+
     m_deviceResources->PIXEndEvent();
 
 	//RENDER TERRAIN
@@ -216,6 +216,16 @@ void Game::Render()
 	//Render the batch,  This is handled in the Display chunk becuase it has the potential to get complex
 	m_displayChunk.RenderBatch(m_deviceResources);
 
+    
+    m_sprites->Begin();
+    WCHAR   Buffer[256];
+    std::wstring var = L"Cam X: " + std::to_wstring(m_camera->GetPosition().x) + L"Cam Z: " + std::to_wstring(m_camera->GetPosition().z);
+    m_font->DrawString(m_sprites.get(), var.c_str(), XMFLOAT2(100, 10), Colors::Yellow);
+	std::wstring var2 = L"Selection: " + m_selection;
+	m_font->DrawString(m_sprites.get(), var2.c_str(), XMFLOAT2(100, 30), Colors::Yellow);
+    m_sprites->End();
+
+    
     m_deviceResources->Present();
 }
 
@@ -623,7 +633,14 @@ void Game::MoveObject(int objectID, int dir, bool UStack) {
     else if (dir == 4) {
         m_displayList[objectID].m_position.y += 0.1f;
     }
-
+    else if (dir == 5) {
+        m_displayList[objectID].m_position.z += 0.1f;
+    }
+    else if (dir == 6) {
+        m_displayList[objectID].m_position.z -= 0.1f;
+    }
+	m_panCamera = true;
+    m_cameraTarget = m_displayList[objectID].m_position;
 }
 
 //Rotates selected object based on which key is pressed
@@ -644,6 +661,12 @@ void Game::RotateObject(int objectID, int dir, bool UStack) {
     }
     else if (dir == 4) {
         m_displayList[objectID].m_orientation.y += 0.1f;
+    }
+    else if (dir == 5) {
+        m_displayList[objectID].m_orientation.z += 0.1f;
+    }
+    else if (dir == 6) {
+        m_displayList[objectID].m_orientation.z -= 0.1f;
     }
 
 }
@@ -667,7 +690,12 @@ void Game::ScaleObject(int objectID, int dir, bool UStack) {
     else if (dir == 4) {
         m_displayList[objectID].m_scale.y += 0.1f;
     }
-
+    else if (dir == 5) {
+        m_displayList[objectID].m_scale.z += 0.1f;
+    }
+    else if (dir == 6) {
+        m_displayList[objectID].m_scale.z -= 0.1f;
+    }
 }
 
 //Deletes selected object
